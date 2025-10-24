@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if employee %}Edit Employee{% else %}Add Employee{% endif %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h2 class="text-center mb-4">{% if employee %}Edit Employee{% else %}Add New Employee{% endif %}</h2>
+
+    <form method="post" class="card p-4 shadow-sm">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" value="{{ employee.name|default:'' }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" value="{{ employee.email|default:'' }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Job Title</label>
+            <input type="text" name="job_title" value="{{ employee.job_title|default:'' }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Salary</label>
+            <input type="number" name="salary" value="{{ employee.salary|default:'' }}" class="form-control" required>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'employee_list' %}" class="btn btn-secondary">Back</a>
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
